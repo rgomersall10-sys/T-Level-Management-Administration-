@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T Level M&A – Paper 1 Revision Activities</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Lato:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    --navy: #1B2A4A;
+    --teal: #00897B;
+    --gold: #F9A825;
+    --light: #E8F5F3;
+    --white: #FFFFFF;
+    --grey: #607D8B;
+    --bg: #F0F4FA;
+    --red: #C62828;
+    --purple: #6A1B9A;
+    --blue: #1565C0;
+    --green: #2E7D32;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  @media print {
+    body { font-size: 12px; background: white; }
+    .activity { page-break-inside: avoid; break-inside: avoid; }
+    .act-header, .answer-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .no-print { display: none; }
+    textarea { border: 1px solid #ccc !important; min-height: 60px !important; }
+    .hint-btn { display: none; }
+  }
+
+  .page { max-width: 980px; margin: 0 auto; padding: 16px; }
+
+  /* ─ PAGE HEADER ─ */
+  .page-header {
+    background: var(--navy);
+    color: white;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .page-header h1 { font-family: 'Nunito', sans-serif; font-size: 22px; color: white; }
+  .page-header p { font-size: 13px; color: #A5D6D2; margin-top: 3px; }
+  .activity-count {
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    padding: 8px 16px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* ─ ACTIVITY WRAPPER ─ */
+  .activity {
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+  .act-header {
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+  }
+  .act-num {
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+  .act-title { font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 800; }
+  .act-type { font-size: 12px; opacity: 0.85; margin-top: 1px; }
+  .act-body { padding: 18px 20px 20px; }
+
+  .col-bc .act-header { background: var(--blue); }
+  .col-pe .act-header { background: var(--purple); }
+  .col-bb .act-header { background: var(--teal); }
+  .col-mix .act-header { background: var(--navy); }
+
+  /* ─ MATCHING ACTIVITY ─ */
+  .match-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 20px;
+  }
+  .match-col h4 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    color: var(--grey);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--bg);
+  }
+  .match-item {
+    padding: 9px 12px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s;
+  }
+  .match-term { background: #E3F2FD; color: var(--blue); font-weight: 700; border: 2px solid transparent; }
+  .match-def { background: #F3E5F5; color: var(--purple); border: 2px solid transparent; }
+  .match-item:hover { transform: translateX(3px); }
+  .match-item.selected { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+  .match-item.matched-correct { background: #E8F5E9; color: var(--green); border-color: var(--green); pointer-events: none; }
+  .match-item.matched-wrong { background: #FFEBEE; color: var(--red); border-color: var(--red); }
+
+  .match-result { margin-top: 10px; font-weight: 700; font-size: 13px; }
+
+  /* ─ FILL IN THE BLANK ─ */
+  .fitb-text {
+    font-size: 14px;
+    line-height: 2.0;
+    color: var(--navy);
+  }
+  .blank-input {
+    display: inline-block;
+    min-width: 140px;
+    border: none;
+    border-bottom: 2px solid var(--navy);
+    background: transparent;
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    color: var(--teal);
+    font-weight: 700;
+    padding: 0 4px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .blank-input:focus { border-color: var(--gold); }
+  .blank-input.correct { border-color: var(--green); color: var(--green); }
+  .blank-input.wrong { border-color: var(--red); color: var(--red); }
+
+  /* ─ MCQ ─ */
+  .mcq-q { margin-bottom: 18px; }
+  .mcq-q p { font-weight: 700; margin-bottom: 8px; font-size: 14px; }
+  .mcq-options { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .mcq-opt {
+    padding: 9px 12px;
+    border-radius: 6px;
+    border: 2px solid #D0D8E8;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.15s;
+    background: white;
+  }
+  .mcq-opt:hover { border-color: var(--teal); background: var(--light); }
+  .mcq-opt.correct { background: #E8F5E9; border-color: var(--green); color: var(--green); font-weight: 700; }
+  .mcq-opt.wrong { background: #FFEBEE; border-color: var(--red); color: var(--red); }
+  .mcq-feedback { font-size: 12px; color: var(--grey); margin-top: 5px; font-style: italic; }
+
+  /* ─ SCENARIO / ERQ ─ */
+  .scenario-box {
+    background: var(--light);
+    border-left: 4px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    font-size: 13.5px;
+  }
+  .scenario-box strong { color: var(--teal); }
+
+  .question-block { margin-bottom: 14px; }
+  .question-block p { font-weight: 700; margin-bottom: 8px; }
+  .question-block .marks {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 800;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  textarea {
+    width: 100%;
+    border: 2px solid #D0D8E8;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 0.2s;
+    color: var(--navy);
+  }
+  textarea:focus { outline: none; border-color: var(--teal); }
+  .char-count { font-size: 11px; color: var(--grey); text-align: right; margin-top: 3px; }
+
+  /* ─ ANSWER REVEAL ─ */
+  .answer-box {
+    background: #FFF8E1;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-size: 13px;
+    display: none;
+  }
+  .answer-box.visible { display: block; }
+  .answer-box h4 { color: var(--navy); font-size: 14px; margin-bottom: 8px; }
+  .answer-box ul { padding-left: 18px; }
+  .answer-box li { margin-bottom: 4px; }
+
+  /* ─ BUTTONS ─ */
+  .btn {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.15s;
+  }
+  .btn-check { background: var(--teal); color: white; }
+  .btn-check:hover { background: #00695C; }
+  .btn-reveal { background: var(--gold); color: var(--navy); }
+  .btn-reveal:hover { background: #F57F17; }
+  .btn-reset { background: #ECEFF1; color: var(--grey); }
+  .btn-reset:hover { background: #CFD8DC; }
+  .btn-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+
+  /* ─ WORD SORT ─ */
+  .word-sort-container { display: flex; gap: 16px; flex-wrap: wrap; }
+  .word-bank {
+    flex: 1; min-width: 200px;
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 80px;
+  }
+  .word-bank h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--grey); margin-bottom: 8px; }
+  .word-chip {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin: 4px;
+    cursor: grab;
+    font-size: 13px;
+    font-weight: 600;
+    user-select: none;
+  }
+  .word-chip:active { cursor: grabbing; }
+  .word-chip.source { background: var(--navy); color: white; }
+  .word-chip.push { background: #E3F2FD; color: var(--blue); border: 2px solid var(--blue); }
+  .word-chip.pull { background: #F3E5F5; color: var(--purple); border: 2px solid var(--purple); }
+  .word-chip.chip-selected {
+    outline: 3px solid var(--gold);
+    box-shadow: 0 0 0 3px var(--gold);
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  .word-chip.dragging { opacity: 0.4; }
+  .word-chip.placed {
+    background: var(--navy);
+    color: white;
+    cursor: pointer;
+    margin: 4px;
+  }
+  .word-chip.placed:hover { opacity: 0.8; }
+  .sort-category.drag-over {
+    background: rgba(0,137,123,0.12) !important;
+    border-style: solid !important;
+  }
+  .sort-category {
+    flex: 1; min-width: 200px;
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 100px;
+    border: 2px dashed;
+  }
+  .sort-push { border-color: var(--blue); background: #E3F2FD22; }
+  .sort-pull { border-color: var(--purple); background: #F3E5F522; }
+  .sort-category h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .sort-push h4 { color: var(--blue); }
+  .sort-pull h4 { color: var(--purple); }
+
+  /* ─ SCORE ─ */
+  .score-banner {
+    background: var(--green);
+    color: white;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    margin-top: 12px;
+    display: none;
+    text-align: center;
+  }
+
+  /* ─ TABLE COMPLETION ─ */
+  .completion-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .completion-table th {
+    background: var(--navy);
+    color: white;
+    padding: 9px 12px;
+    text-align: left;
+  }
+  .completion-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #E0E7EF;
+    vertical-align: top;
+  }
+  .completion-table tr:nth-child(even) td { background: #F7FAFC; }
+  .completion-table input {
+    border: none;
+    border-bottom: 2px solid #D0D8E8;
+    background: transparent;
+    font-size: 13px;
+    font-family: 'Lato', sans-serif;
+    color: var(--teal);
+    font-weight: 700;
+    width: 100%;
+    outline: none;
+    padding: 2px 0;
+  }
+  .completion-table input:focus { border-color: var(--gold); }
+
+  /* ─ SECTION LABEL ─ */
+  .section-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--grey);
+    margin-bottom: 10px;
+    margin-top: 4px;
+    padding-left: 2px;
+  }
+
+  .tip-box {
+    background: #E8F5E9;
+    border-left: 4px solid var(--green);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 14px;
+    color: #1B5E20;
+  }
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>🎯 Core Paper 1 — Revision Activities</h1>
+      <p>T Level Management & Administration &nbsp;|&nbsp; Business Context • People • Business Behaviours</p>
+    </div>
+    <div class="activity-count">6 Activities · Complete on Screen or Print</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+  ACTIVITY 1: MATCHING — LEGAL ENTITY TYPES
+  ═══════════════════════════════════════════ -->
+  <div class="activity col-bc">
+    <div class="act-header">
+      <div class="act-num">1</div>
+      <div>
+        <div class="act-title">🔗 Matching Activity — Legal Entity Types</div>
+        <div class="act-type">Business Context · Click a term then click its matching definition</div>
+      </div>
+    </div>
+    <div class="act-body">
+      <div class="tip-box">💡 <strong>Exam tip:</strong> You must be able to identify legal entity types AND explain their characteristics and advantages/disadvantages.</div>
+      <div class="match-grid">
+        <div class="match-col">
+          <h4>Legal Entity Type</h4>
+          <div id="terms-container">
+            <div class="match-item match-term" data-id="1" onclick="selectItem(this)">Sole Trader</div>
+            <div class="match-item match-term" data-id="2" onclick="selectItem(this)">PLC</div>
+            <div class="match-item match-term" data-id="3" onclick="selectItem(this)">CIC</div>
+            <div class="match-item match-term" data-id="4" onclick="selectItem(this)">Cooperative</div>
+            <div class="match-item match-term" data-id="5" onclick="selectItem(this)">Franchise</div>
+            <div class="match-item match-term" data-id="6" onclick="selectItem(this)">LLP</div>
+          </div>
+        </div>
+        <div class="match-col">
+          <h4>Description</h4>
+          <div id="defs-container">
+            <div class="match-item match-def" data-id="3" onclick="selectItem(this)">A social enterprise that uses profits for community benefit, not private shareholders.</div>
+            <div class="match-item match-def" data-id="6" onclick="selectItem(this)">Partners benefit from limited liability protection; common in professional services firms.</div>
+            <div class="match-item match-def" data-id="1" onclick="selectItem(this)">Owned and run by one person with unlimited liability; simplest business structure.</div>
+            <div class="match-item match-def" data-id="5" onclick="selectItem(this)">Business model where owner pays to use an established brand's systems and name.</div>
+            <div class="match-item match-def" data-id="2" onclick="selectItem(this)">Shares traded on the Stock Exchange; must publish annual accounts publicly.</div>
+            <div class="match-item match-def" data-id="4" onclick="selectItem(this)">Owned and democratically controlled by its members who share in the profits.</div>
+          </div>
+        </div>
+      </div>
+      <div id="match1-score" class="score-banner"></div>
+      <div class="btn-row">
+        <button class="btn btn-reset" onclick="resetMatch()">↺ Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+  ACTIVITY 2: FILL IN THE BLANKS — MOTIVATION
+  ═══════════════════════════════════════════ -->
+  <div class="activity col-pe">
+    <div class="act-header">
+      <div class="act-num">2</div>
+      <div>
+        <div class="act-title">✏️ Fill in the Blanks — Motivation Theories</div>
+        <div class="act-type">People · Type your answers in the gaps and click Check</div>
+      </div>
+    </div>
+    <div class="act-body">
+      <div class="tip-box">💡 <strong>Exam tip:</strong> Motivation theories are popular in extended response questions. Know each theory AND be able to apply it to a workplace scenario.</div>
+      <div class="fitb-text" id="fitb-text">
+
+        <p style="margin-bottom:12px;">
+          <strong>Maslow's Hierarchy of Needs</strong> suggests that human needs are arranged in five levels.
+          The most basic are <input class="blank-input" data-ans="physiological" placeholder="________"> needs such as food and shelter.
+          Only when lower needs are met can higher needs, such as
+          <input class="blank-input" data-ans="self-actualisation" placeholder="____________">, motivate behaviour.
+        </p>
+
+        <p style="margin-bottom:12px;">
+          <strong>Herzberg's Two-Factor Theory</strong> identifies two types of factor.
+          <input class="blank-input" data-ans="hygiene" placeholder="_______"> factors (such as salary and working conditions)
+          prevent dissatisfaction but do NOT motivate on their own.
+          True motivation comes from <input class="blank-input" data-ans="motivators" placeholder="__________"> such as
+          recognition, achievement and responsibility.
+        </p>
+
+        <p style="margin-bottom:12px;">
+          <strong>McGregor's Theory X and Y</strong> contrasts two beliefs about workers.
+          A Theory <input class="blank-input" data-ans="x" placeholder="_"> manager believes employees are lazy and need close supervision.
+          A Theory <input class="blank-input" data-ans="y" placeholder="_"> manager believes employees are self-motivated and
+          want <input class="blank-input" data-ans="responsibility" placeholder="______________">.
+        </p>
+
+        <p>
+          In practice, organisations use motivational theory to improve
+          <input class="blank-input" data-ans="engagement" placeholder="__________"> and reduce
+          <input class="blank-input" data-ans="turnover" placeholder="________">, which saves on
+          recruitment and training costs.
+        </p>
+
+      </div>
+      <div id="fitb-feedback" style="margin-top:10px; font-size:13px; font-weight:700;"></div>
+      <div class="btn-row">
+        <button class="btn btn-check" onclick="checkFITB()">✓ Check Answers</button>
+        <button class="btn btn-reset" onclick="resetFITB()">↺ Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+  ACTIVITY 3: WORD SORT — PUSH vs PULL MARKETING
+  ═══════════════════════════════════════════ -->
+  <div class="activity col-bc">
+    <div class="act-header">
+      <div class="act-num">3</div>
+      <div>
+        <div class="act-title">🗂️ Word Sort — Push vs Pull Marketing</div>
+        <div class="act-type">Business Context · ⚠️ This was a WEAK area in the Autumn 2024 exam!</div>
+      </div>
+    </div>
+    <div class="act-body">
+      <div class="tip-box">💡 <strong>Push</strong> = you push OUT to consumers. <strong>Pull</strong> = you attract consumers IN. Many students confuse these — don't be one of them!</div>
+      <p style="font-size:13px; color:var(--grey); margin-bottom:10px;">
+        <strong>How to use:</strong> <strong>Click</strong> a chip to select it (turns gold ✨), then <strong>click</strong> the PUSH or PULL zone to place it there. Or <strong>drag and drop</strong> directly into a zone.
+      </p>
+
+      <div id="word-source" style="background:var(--bg); border-radius:8px; padding:12px; min-height:56px; margin-bottom:14px;">
+        <p style="font-size:11px; color:var(--grey); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em; font-weight:700;">Word bank</p>
+        <span class="word-chip source" draggable="true" data-cat="push">TV advertisement</span>
+        <span class="word-chip source" draggable="true" data-cat="pull">Search engine optimisation</span>
+        <span class="word-chip source" draggable="true" data-cat="push">Cold calling</span>
+        <span class="word-chip source" draggable="true" data-cat="pull">Customer reviews</span>
+        <span class="word-chip source" draggable="true" data-cat="push">Direct mail leaflet</span>
+        <span class="word-chip source" draggable="true" data-cat="pull">Social media content</span>
+        <span class="word-chip source" draggable="true" data-cat="push">Pop-up online ad</span>
+        <span class="word-chip source" draggable="true" data-cat="pull">Referral programme</span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div class="sort-category sort-push" id="push-zone">
+          <h4>📢 PUSH Marketing</h4>
+          <p style="font-size:12px; color:#607D8B; margin-bottom:6px;">Sending messages OUT to consumers</p>
+        </div>
+        <div class="sort-category sort-pull" id="pull-zone">
+          <h4>🧲 PULL Marketing</h4>
+          <p style="font-size:12px; color:#607D8B; margin-bottom:6px;">Attracting consumers IN to you</p>
+        </div>
+      </div>
+
+      <div id="sort-score" class="score-banner"></div>
+      <div class="btn-row">
+        <button class="btn btn-check" onclick="checkSort()">✓ Check Answers</button>
+        <button class="btn btn-reset" onclick="resetSort()">↺ Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+  ACTIVITY 4: MCQ QUIZ
+  ═══════════════════════════════════════════ -->
+  <div class="activity col-mix">
+    <div class="act-header">
+      <div class="act-num">4</div>
+      <div>
+        <div class="act-title">❓ Multiple Choice Quiz — Mixed Topics</div>
+        <div class="act-type">All Topics · Click your answer to reveal instant feedback</div>
+      </div>
+    </div>
+    <div class="act-body">
+
+      <div class="mcq-q">
+        <p>1. Which of the following is a <em>Hygiene Factor</em> in Herzberg's Two-Factor Theory?</p>
+        <div class="mcq-options">
+          <button class="mcq-opt" onclick="mcqAns(this,false,'Hygiene factors are conditions that prevent dissatisfaction. Achievement is a MOTIVATOR.')">Achievement</button>
+          <button class="mcq-opt" onclick="mcqAns(this,true,'Correct! Salary is a hygiene factor — it prevents dissatisfaction but doesn\'t motivate on its own.')">Salary</button>
+          <button class="mcq-opt" onclick="mcqAns(this,false,'Recognition is a MOTIVATOR in Herzberg\'s theory, not a hygiene factor.')">Recognition</button>
+          <button class="mcq-opt" onclick="mcqAns(this,false,'Responsibility is a MOTIVATOR. Hygiene factors include pay, policy and conditions.')">Responsibility</button>
+        </div>
+      </div>
+
+      <div class="mcq-q">
+        <p>2. An organisation's culture is BEST demonstrated externally through...</p>
+        <div class="mcq-options">
+          <button class="mcq-opt" onclick="mcqAns(this,false,'Staff handbooks are internal. Culture is shown externally through branding and communication.')">Staff handbooks and induction programmes</button>
+          <button class="mcq-opt" onclick="mcqAns(this,true,'Correct! Branding, mission statements and external communications show culture to the outside world.')">Branding, mission statements and external communications</button>
+          <button class="mcq-opt" onclick="mcqAns(this,false,'Performance reviews are internal processes, not how culture is shown externally.')">Performance review processes</button>
+          <button class="mcq-opt" onclick="mcqAns(this,false,'Payroll systems are internal operational tools, not demonstrations of culture.')">Payroll and benefits systems</button>
+        </div>
+      </div>
+
+      <div class="mcq-q">
+        <p>3. What is the PRIMARY purpose of an Employee Assistance Scheme (EAS)?</p>
+        <div class="mcq-options">
+          <button class="mcq-opt" onclick="mcqAns(this,false,'EAS is NOT about reward packages or bonuses — this was the most common mistake in the 2024 exam!')">To provide financial bonuses and reward packages</button>
+          <button class="mcq-opt" onclick="mcqAns(this,false,'Recruitment support is handled by HR processes, not an EAS.')">To support the recruitment process</button>
+          <button class="mcq-opt" onclick="mcqAns(this,true,'Correct! EAS = mental health and wellbeing support. E.g. counselling, mindfulness, employee helplines.')">To support employee mental health and wellbeing</button>
+          <button class="mcq-opt" onclick="mcqAns(this,false,'Training programmes are part of L&D, not the primary purpose of an EAS.')">To manage employee training programmes</button>
+        </div>
+      </div>
+
+      <div class="mcq-q">
+        <p>4. Which regulatory body oversees data protection compliance in the UK?</p>
+        <div class="mcq-options">
+          <button class="mcq-opt" onclick="mcqAns(this,false,'The HSE oversees health and safety in workplaces, not data protection.')">Health and Safety Executive (HSE)</button>
+          <button class="mcq-opt" onclick="mcqAns(this,true,'Correct! The ICO enforces GDPR and the Data Protection Act 2018 in the UK.')">Information Commissioner's Office (ICO)</button>
+          <button class="mcq-opt" onclick="mcqAns(this,false,'The CMA oversees competition and consumer protection, not data.')">Competition and Markets Authority (CMA)</button>
+          <button class="mcq-opt" onclick="mcqAns(this,false,'Ofsted inspects education settings. Not the data protection regulator.')">Ofsted</button>
+        </div>
+      </div>
+
+      <div class="mcq-q">
+        <p>5. A manager who gives full autonomy to a skilled, experienced team is using which style?</p>
+        <div class="mcq-options">
+          <button class="mcq-opt" onclick="mcqAns(this,false,'Autocratic style involves the leader making all decisions — the opposite of giving autonomy.')">Autocratic</button>
+          <button class="mcq-opt" onclick="mcqAns(this,false,'Democratic involves the team in decisions but the leader is still present and guides the process.')">Democratic</button>
+          <button class="mcq-opt" onclick="mcqAns(this,true,'Correct! Laissez-faire = hands-off. The leader delegates fully and trusts staff to manage themselves.')">Laissez-faire</button>
+          <button class="mcq-opt" onclick="mcqAns(this,false,'Pacesetting sets very high standards and actively drives performance — not hands-off.')">Pacesetting</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+  ACTIVITY 5: LEADERSHIP STYLES TABLE COMPLETION
+  ═══════════════════════════════════════════ -->
+  <div class="activity col-pe">
+    <div class="act-header">
+      <div class="act-num">5</div>
+      <div>
+        <div class="act-title">📋 Complete the Table — Leadership Styles</div>
+        <div class="act-type">People · Fill in the missing information for each leadership style</div>
+      </div>
+    </div>
+    <div class="act-body">
+      <div class="tip-box">💡 <strong>Exam tip:</strong> You must know WHEN to use each style, not just what it is. Exam questions will give a scenario and ask you to justify your choice.</div>
+      <table class="completion-table">
+        <thead>
+          <tr>
+            <th>Leadership Style</th>
+            <th>Key Characteristic</th>
+            <th>Best Situation to Use</th>
+            <th>One Disadvantage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Autocratic</strong></td>
+            <td><input type="text" placeholder="Type here..."></td>
+            <td><input type="text" placeholder="Type here..."></td>
+            <td><input type="text" placeholder="Type here..."></td>
+          </tr>
+          <tr>
+            <td><strong>Democratic</strong></td>
+            <td><input type="text" placeholder="Type here..."></td>
+            <td><input type="text" placeholder="Type here..."></td>
+            <td><input type="text" placeholder="Type here..."></td>
+          </tr>
+          <tr>
+            <td><strong>Laissez-faire</strong></td>
+            <td><input type="text" placeholder="Type here..."></td>
+            <td><input type="text" placeholder="Type here..."></td>
+            <td><input type="text" placeholder="Type here..."></td>
+          </tr>
+          <tr>
+            <td><strong>Coaching</strong></td>
+            <td><input type="text" placeholder="Type here..."></td>
+            <td><input type="text" placeholder="Type here..."></td>
+            <td><input type="text" placeholder="Type here..."></td>
+          </tr>
+          <tr>
+            <td><strong>Affiliative</strong></td>
+            <td><input type="text" placeholder="Type here..."></td>
+            <td><input type="text" placeholder="Type here..."></td>
+            <td><input type="text" placeholder="Type here..."></td>
+          </tr>
+          <tr>
+            <td><strong>Pacesetting</strong></td>
+            <td><input type="text" placeholder="Type here..."></td>
+            <td><input type="text" placeholder="Type here..."></td>
+            <td><input type="text" placeholder="Type here..."></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="btn-row">
+        <button class="btn btn-reveal" onclick="toggleAnswer('ans5')">👁 Show Model Answers</button>
+      </div>
+      <div class="answer-box" id="ans5">
+        <h4>✅ Model Answers — Leadership Styles</h4>
+        <table class="completion-table" style="margin-top:8px; font-size:12px;">
+          <thead><tr><th>Style</th><th>Key Characteristic</th><th>Best Situation</th><th>One Disadvantage</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Autocratic</strong></td><td>Leader makes all decisions alone</td><td>Crisis / emergency / time-critical situations</td><td>Can damage morale; reduces team ownership</td></tr>
+            <tr><td><strong>Democratic</strong></td><td>Team involved in decision-making</td><td>Complex problems; when buy-in is needed</td><td>Slower decision-making process</td></tr>
+            <tr><td><strong>Laissez-faire</strong></td><td>Hands-off; full autonomy given</td><td>Skilled, experienced, self-motivated teams</td><td>Can cause lack of direction; needs expert staff</td></tr>
+            <tr><td><strong>Coaching</strong></td><td>Focus on developing individuals</td><td>New starters; underperforming staff</td><td>Time-consuming; results take time</td></tr>
+            <tr><td><strong>Affiliative</strong></td><td>People-first; builds harmony</td><td>Conflict situations; rebuilding trust</td><td>May avoid giving difficult feedback</td></tr>
+            <tr><td><strong>Pacesetting</strong></td><td>Sets high standards; leads by example</td><td>High-performing, highly motivated teams</td><td>Can overwhelm or burn out average performers</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+  ACTIVITY 6: ERQ PRACTICE — SELF-MANAGEMENT
+  ═══════════════════════════════════════════ -->
+  <div class="activity col-bb">
+    <div class="act-header">
+      <div class="act-num">6</div>
+      <div>
+        <div class="act-title">📝 Extended Response Practice — Self-Management</div>
+        <div class="act-type">Business Behaviours · AO3 · ⚠️ Top weak area from 2024 examiner report</div>
+      </div>
+    </div>
+    <div class="act-body">
+      <div class="scenario-box">
+        <strong>Scenario:</strong> FinServ Solutions is a growing financial services company with 80 employees.
+        The company has recently promoted several members of its customer service team to junior team leader roles.
+        The new junior team leaders are enthusiastic but are struggling to manage their time effectively, missing internal deadlines
+        and finding it difficult to prioritise tasks when dealing with multiple team members' requests simultaneously.
+        The Operations Manager is concerned that these issues could affect team productivity and client satisfaction.
+      </div>
+
+      <div class="question-block">
+        <p>Analyse the importance of using self-management approaches and explain how adopting these could benefit both the organisation and the junior team leaders at FinServ Solutions. <span class="marks">12 marks</span></p>
+        <textarea id="erq-ans" placeholder="Write your answer here. Remember: use the PEE structure (Point → Explain → Evidence/Example → Impact). Link every point to the FinServ Solutions scenario. For a 12-mark question, aim for 3–4 well-developed points. For 'Analyse', you need cause and effect, not just description." rows="10" oninput="updateCharCount(this, 'erq-count')"></textarea>
+        <div class="char-count" id="erq-count">0 characters typed</div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-reveal" onclick="toggleAnswer('erq-model')">👁 Show Mark Scheme / Model Answer</button>
+      </div>
+
+      <div class="answer-box" id="erq-model">
+        <h4>✅ Mark Scheme & Model Indicative Content (12 marks)</h4>
+        <p style="margin-bottom:8px; font-size:12px; color:#5D4037;"><strong>Band 4 (10–12 marks):</strong> Thorough analysis of multiple self-management approaches with clear cause/effect reasoning. Every point is clearly linked to FinServ Solutions scenario. Sustained, well-organised response.</p>
+        <p style="margin-bottom:8px; font-size:12px; color:#616161;"><strong>Band 3 (7–9 marks):</strong> Clear analysis of several approaches with good scenario link. Some points developed but depth inconsistent.</p>
+        <p style="margin-bottom:8px; font-size:12px; color:#616161;"><strong>Band 2 (4–6 marks):</strong> Some accurate points with basic explanation. Limited development or scenario linkage.</p>
+        <p style="margin-bottom:10px; font-size:12px; color:#616161;"><strong>Band 1 (1–3 marks):</strong> Basic recall with little development or no link to scenario.</p>
+        <h4 style="margin-top:8px;">Indicative Content (points that could be awarded marks):</h4>
+        <ul>
+          <li><strong>Time management:</strong> Junior team leaders are missing deadlines, so using tools like daily to-do lists, calendars or time-blocking would help them prioritise tasks. This would reduce missed deadlines at FinServ, improving client satisfaction and team productivity.</li>
+          <li><strong>Prioritisation:</strong> Using frameworks such as the Eisenhower Matrix (urgent vs important) would allow team leaders to identify which tasks need immediate action vs which can be delegated. This reduces overwhelm and ensures critical client work is not delayed.</li>
+          <li><strong>Accountability:</strong> Team leaders should take ownership of their decisions and be transparent with their manager if they are struggling. At FinServ, this means escalating issues early rather than letting problems compound — protecting clients and the team.</li>
+          <li><strong>Resilience:</strong> New team leaders are likely to face setbacks as they adjust to their roles. Developing resilience means they can bounce back from mistakes and continue to lead effectively, rather than becoming disengaged or stressed.</li>
+          <li><strong>CPD / self-development:</strong> Encouraging team leaders to attend time management training or coaching sessions means they gain the specific skills needed for their new responsibilities — benefiting the individual and the organisation long term.</li>
+          <li><strong>Emotional intelligence:</strong> Managing a team requires understanding how team members are feeling. EI helps team leaders avoid unconscious bias in assigning work and manage interpersonal dynamics more effectively.</li>
+        </ul>
+        <p style="margin-top:10px; font-size:12px; color:#BF360C;"><strong>⚠️ Common mistakes:</strong> Generic answers not linked to FinServ. Listing points without explanation or cause/effect. Describing self-management rather than analysing it. Not mentioning the IMPACT on both individual AND organisation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="text-align:center; font-size:12px; color:var(--grey); padding:16px; border-top: 2px solid var(--teal); margin-top:8px;">
+    T Level Technical Qualification in Management and Administration (City & Guilds 8715) &nbsp;|&nbsp;
+    Core Paper 1 Revision Activities &nbsp;|&nbsp; Good luck tomorrow! 🚀
+  </div>
+
+</div>
+
+<script>
+// ─── MATCHING ACTIVITY ──────────────────────────────────────
+let selectedItem = null;
+let matchedPairs = 0;
+
+function selectItem(el) {
+  if (el.classList.contains('matched-correct')) return;
+  if (selectedItem === null) {
+    selectedItem = el;
+    el.classList.add('selected');
+  } else {
+    if (selectedItem === el) {
+      selectedItem.classList.remove('selected');
+      selectedItem = null;
+      return;
+    }
+    // Check if they're from different columns
+    const isTerm = el.classList.contains('match-term');
+    const prevIsTerm = selectedItem.classList.contains('match-term');
+    if (isTerm === prevIsTerm) {
+      selectedItem.classList.remove('selected');
+      selectedItem = el;
+      el.classList.add('selected');
+      return;
+    }
+    if (el.dataset.id === selectedItem.dataset.id) {
+      el.classList.remove('selected');
+      selectedItem.classList.remove('selected');
+      el.classList.add('matched-correct');
+      selectedItem.classList.add('matched-correct');
+      matchedPairs++;
+      if (matchedPairs === 6) {
+        const score = document.getElementById('match1-score');
+        score.style.display = 'block';
+        score.textContent = '🎉 Excellent! All 6 matches correct! You know your legal entity types!';
+      }
+    } else {
+      el.classList.add('matched-wrong');
+      selectedItem.classList.add('matched-wrong');
+      setTimeout(() => {
+        el.classList.remove('matched-wrong', 'selected');
+        selectedItem.classList.remove('matched-wrong', 'selected');
+        selectedItem = null;
+      }, 900);
+      selectedItem = null;
+      return;
+    }
+    selectedItem = null;
+  }
+}
+
+function resetMatch() {
+  matchedPairs = 0;
+  document.querySelectorAll('.match-item').forEach(el => {
+    el.classList.remove('matched-correct','matched-wrong','selected');
+  });
+  document.getElementById('match1-score').style.display = 'none';
+  selectedItem = null;
+}
+
+// ─── FILL IN THE BLANKS ─────────────────────────────────────
+function checkFITB() {
+  const inputs = document.querySelectorAll('.blank-input');
+  let correct = 0;
+  inputs.forEach(inp => {
+    const ans = inp.value.trim().toLowerCase();
+    const expected = inp.dataset.ans.toLowerCase();
+    if (ans === expected || ans.includes(expected) || expected.includes(ans.split(' ')[0])) {
+      inp.classList.remove('wrong');
+      inp.classList.add('correct');
+      correct++;
+    } else {
+      inp.classList.remove('correct');
+      inp.classList.add('wrong');
+    }
+  });
+  const fb = document.getElementById('fitb-feedback');
+  if (correct === inputs.length) {
+    fb.style.color = 'var(--green)';
+    fb.textContent = `🎉 Perfect! All ${inputs.length}/${inputs.length} correct! Outstanding revision!`;
+  } else {
+    fb.style.color = 'var(--red)';
+    fb.textContent = `${correct}/${inputs.length} correct. Check your red answers and try again.`;
+  }
+}
+
+function resetFITB() {
+  document.querySelectorAll('.blank-input').forEach(inp => {
+    inp.value = '';
+    inp.classList.remove('correct','wrong');
+  });
+  document.getElementById('fitb-feedback').textContent = '';
+}
+
+// ─── WORD SORT ───────────────────────────────────────────────
+// Tracks which chip is currently selected via click
+let selectedChip = null;
+
+function initSort() {
+  const chips = document.querySelectorAll('#word-source .word-chip');
+  const pushZone = document.getElementById('push-zone');
+  const pullZone = document.getElementById('pull-zone');
+
+  // ── CLICK-TO-SELECT-THEN-PLACE ──────────────────────────────
+  chips.forEach(chip => {
+    chip.addEventListener('click', function() {
+      // Deselect if already selected
+      if (selectedChip === this) {
+        this.classList.remove('chip-selected');
+        selectedChip = null;
+        return;
+      }
+      // Deselect any previously selected chip
+      if (selectedChip) selectedChip.classList.remove('chip-selected');
+      selectedChip = this;
+      this.classList.add('chip-selected');
+    });
+  });
+
+  // Clicking a zone places the selected chip there
+  [pushZone, pullZone].forEach(zone => {
+    zone.addEventListener('click', function() {
+      if (!selectedChip) return;
+      placeChip(selectedChip, this);
+      selectedChip = null;
+    });
+  });
+
+  // ── DRAG AND DROP ────────────────────────────────────────────
+  chips.forEach(chip => {
+    chip.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', this.textContent.trim());
+      e.dataTransfer.effectAllowed = 'move';
+      // Store reference on dataTransfer using a global
+      window._draggingChip = this;
+      setTimeout(() => this.classList.add('dragging'), 0);
+    });
+    chip.addEventListener('dragend', function() {
+      this.classList.remove('dragging');
+      window._draggingChip = null;
+    });
+  });
+
+  [pushZone, pullZone].forEach(zone => {
+    zone.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      this.classList.add('drag-over');
+    });
+    zone.addEventListener('dragleave', function() {
+      this.classList.remove('drag-over');
+    });
+    zone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      this.classList.remove('drag-over');
+      const chip = window._draggingChip;
+      if (chip) placeChip(chip, this);
+    });
+  });
+}
+
+function placeChip(chip, zone) {
+  // Remove from wherever it currently lives
+  chip.classList.remove('chip-selected');
+
+  // Create a placed copy in the zone
+  const placed = document.createElement('span');
+  placed.className = 'word-chip placed';
+  placed.textContent = chip.textContent.trim();
+  placed.dataset.cat = chip.dataset.cat;
+  // Allow clicking placed chip to send it back to the word bank
+  placed.addEventListener('click', function() {
+    returnChip(chip, placed);
+  });
+  zone.appendChild(placed);
+
+  // Hide the original in the word bank (keep it for reset)
+  chip.style.visibility = 'hidden';
+  chip.style.pointerEvents = 'none';
+}
+
+function returnChip(original, placed) {
+  placed.remove();
+  original.style.visibility = 'visible';
+  original.style.pointerEvents = 'auto';
+  original.classList.remove('chip-selected');
+  // Remove any check styling
+  original.style.background = '';
+  original.style.borderColor = '';
+}
+
+function checkSort() {
+  const pushZone = document.getElementById('push-zone');
+  const pullZone = document.getElementById('pull-zone');
+  let correct = 0; let total = 0;
+
+  pushZone.querySelectorAll('.word-chip.placed').forEach(chip => {
+    total++;
+    if (chip.dataset.cat === 'push') {
+      chip.style.background = '#C8E6C9'; chip.style.color = '#1B5E20';
+      chip.style.border = '2px solid #2E7D32';
+      correct++;
+    } else {
+      chip.style.background = '#FFCDD2'; chip.style.color = '#B71C1C';
+      chip.style.border = '2px solid #C62828';
+    }
+  });
+  pullZone.querySelectorAll('.word-chip.placed').forEach(chip => {
+    total++;
+    if (chip.dataset.cat === 'pull') {
+      chip.style.background = '#E1BEE7'; chip.style.color = '#4A148C';
+      chip.style.border = '2px solid #6A1B9A';
+      correct++;
+    } else {
+      chip.style.background = '#FFCDD2'; chip.style.color = '#B71C1C';
+      chip.style.border = '2px solid #C62828';
+    }
+  });
+
+  const score = document.getElementById('sort-score');
+  score.style.display = 'block';
+  if (total === 0) {
+    score.textContent = '⚠️ Place some chips in the zones first!';
+    score.style.background = 'var(--grey)';
+  } else if (correct === 8) {
+    score.textContent = '🎉 Perfect! 8/8 — you nailed Push vs Pull marketing!';
+    score.style.background = 'var(--green)';
+  } else {
+    score.textContent = `${correct}/${total} placed correctly. Red chips are in the wrong zone — click them to return them and try again!`;
+    score.style.background = 'var(--red)';
+  }
+}
+
+function resetSort() {
+  // Remove all placed chips from zones
+  document.querySelectorAll('#push-zone .word-chip.placed, #pull-zone .word-chip.placed').forEach(el => el.remove());
+  // Restore all source chips
+  document.querySelectorAll('#word-source .word-chip').forEach(chip => {
+    chip.style.visibility = 'visible';
+    chip.style.pointerEvents = 'auto';
+    chip.style.background = '';
+    chip.style.borderColor = '';
+    chip.classList.remove('chip-selected');
+  });
+  selectedChip = null;
+  const score = document.getElementById('sort-score');
+  score.style.display = 'none';
+}
+
+// Initialise on page load
+document.addEventListener('DOMContentLoaded', initSort);
+
+// ─── MCQ ─────────────────────────────────────────────────────
+function mcqAns(btn, correct, feedback) {
+  const group = btn.closest('.mcq-options');
+  group.querySelectorAll('.mcq-opt').forEach(b => {
+    b.onclick = null;
+    b.style.cursor = 'default';
+  });
+  if (correct) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('wrong');
+    group.querySelectorAll('.mcq-opt').forEach(b => {
+      if (b.getAttribute('onclick') && b.getAttribute('onclick').includes('true')) {
+        // Can't retroactively show correct since onclick was cleared
+      }
+    });
+  }
+  const fb = document.createElement('p');
+  fb.className = 'mcq-feedback';
+  fb.textContent = (correct ? '✅ ' : '❌ ') + feedback;
+  const existing = btn.closest('.mcq-q').querySelector('.mcq-feedback');
+  if (existing) existing.remove();
+  btn.closest('.mcq-q').appendChild(fb);
+}
+
+// ─── ANSWER TOGGLE ───────────────────────────────────────────
+function toggleAnswer(id) {
+  const box = document.getElementById(id);
+  box.classList.toggle('visible');
+}
+
+// ─── CHAR COUNT ─────────────────────────────────────────────
+function updateCharCount(el, countId) {
+  document.getElementById(countId).textContent = el.value.length + ' characters typed';
+}
+</script>
+</body>
+</html>
